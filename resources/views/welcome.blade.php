@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <style>
             html, body {
                 background-color: #fff;
@@ -71,6 +72,10 @@
               font-weight: 600;
               color: #000;
             }
+
+            .hidden-element{
+              display: none;
+            }
         </style>
     </head>
     <body>
@@ -103,6 +108,12 @@
                 </div>
 
                 <div class="best-weather m-t-md">
+                   <a href="getcitieslistweather/3128760,2911298,2960316,2735943,2509954" class="btn btn-default btn-lg" role="button" aria-pressed="true">
+                     Get the city with best weather
+                   </a>
+                </div>
+
+                <div class="best-weather m-t-md hidden-element">
                     The city with the best weather is Valencia (20º)
                 </div>
             </div>
