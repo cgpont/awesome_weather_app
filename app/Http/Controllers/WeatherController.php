@@ -8,8 +8,6 @@ use GuzzleHttp\Client; //http://docs.guzzlephp.org
 class WeatherController extends Controller
 {
 
-  private $apiBaseUrl = 'http://api.openweathermap.org/data/2.5/';
-  private $apiId = 'baede2b33660a266dfd0fb33470868a0';
   private $apiUnits = 'metric';
 
   /**
@@ -23,14 +21,14 @@ class WeatherController extends Controller
   {
     try {
         $client = new Client([
-            'base_uri' => $this->apiBaseUrl,
+            'base_uri' => env('OPEN_MAPS_API_BASE_URL'),
             'timeout'  => 1.0,
         ]);
         $response = $client->request('GET',
                                      'weather',
                                      ['query' => ['id' => $cityId,
                                                   'units' => $this->apiUnits,
-                                                  'appid' => $this->apiId]
+                                                  'appid' => env('OPEN_MAPS_API_ID')]
                                      ]);
         $response = $response->getBody()->getContents();
         return $response;
@@ -55,14 +53,14 @@ class WeatherController extends Controller
   {
     try {
       $client = new Client([
-          'base_uri' => $this->apiBaseUrl,
+          'base_uri' => env('OPEN_MAPS_API_BASE_URL'),
           'timeout'  => 2.0,
       ]);
       $response = $client->request('GET',
                                    'group',
                                    ['query' => ['id' => $citiesIds,
                                                 'units' => $this->apiUnits,
-                                                'appid' => $this->apiId]
+                                                'appid' => env('OPEN_MAPS_API_ID')]
                                    ]);
       $response = $response->getBody()->getContents();
       return $response;
