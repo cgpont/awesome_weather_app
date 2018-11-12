@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('getcityweather/{cityId}', 'WeatherController@getCityWeather')->name('weather.getCityWeather');
