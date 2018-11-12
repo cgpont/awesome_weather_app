@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Awesome Weather App</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -61,6 +61,16 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .m-t-md {
+                margin-top: 30px;
+            }
+
+            .best-weather {
+              padding: 10px;
+              font-weight: 600;
+              color: #000;
+            }
         </style>
     </head>
     <body>
@@ -81,16 +91,19 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Awesome Weather App
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://openweathermap.org/city/3128760">Barcelona</a>
+                    <a href="https://openweathermap.org/city/2911298">Hamburg</a>
+                    <a href="https://openweathermap.org/city/2960316">Luxembourg</a>
+                    <a href="https://openweathermap.org/city/2735943">Porto</a>
+                    <a href="https://openweathermap.org/city/2509954">Valencia</a>
+                </div>
+
+                <div class="best-weather m-t-md">
+                    The city with the best weather is Valencia (20º)
                 </div>
             </div>
         </div>
