@@ -108,14 +108,17 @@
                 </div>
 
                 <div class="best-weather m-t-md">
-                   <a href="getcitieslistweather/3128760,2911298,2960316,2735943,2509954" class="btn btn-default btn-lg" role="button" aria-pressed="true">
+                   <a href="getbestweathercity/3128760,2911298,2960316,2735943,2509954" class="btn btn-default btn-lg" role="button" aria-pressed="true">
                      Get the city with best weather
                    </a>
                 </div>
 
-                <div class="best-weather m-t-md hidden-element">
-                    The city with the best weather is Valencia (20º)
-                </div>
+                @if (Route::has('getbestweathercity'))
+                  <div class="best-weather m-t-md hidden-element">
+                      The city with the best weather is Valencia (20º)
+                  </div>
+                @endif
+
             </div>
         </div>
     </body>

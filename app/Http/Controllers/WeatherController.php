@@ -10,6 +10,7 @@ class WeatherController extends Controller
 
   private $apiBaseUrl = 'http://api.openweathermap.org/data/2.5/';
   private $apiId = 'baede2b33660a266dfd0fb33470868a0';
+  private $apiUnits = 'metric';
 
   /**
    * Gets the weather for a given city id.
@@ -23,11 +24,12 @@ class WeatherController extends Controller
     try {
         $client = new Client([
             'base_uri' => $this->apiBaseUrl,
-            'timeout'  => 2.0,
+            'timeout'  => 1.0,
         ]);
         $response = $client->request('GET',
                                      'weather',
                                      ['query' => ['id' => $cityId,
+                                                  'units' => $this->apiUnits,
                                                   'appid' => $this->apiId]
                                      ]);
         $response = $response->getBody()->getContents();
@@ -44,6 +46,7 @@ class WeatherController extends Controller
 
   /**
    * Gets the weather for all given cities ids.
+   * Uses library http://docs.guzzlephp.org
    *
    * @param string  $citiesIds
    * @return \Illuminate\Http\Response
@@ -58,6 +61,7 @@ class WeatherController extends Controller
       $response = $client->request('GET',
                                    'group',
                                    ['query' => ['id' => $citiesIds,
+                                                'units' => $this->apiUnits,
                                                 'appid' => $this->apiId]
                                    ]);
       $response = $response->getBody()->getContents();
@@ -70,6 +74,29 @@ class WeatherController extends Controller
         );
         return $errorResponse;
     }
+  }
+
+  /**
+   * Gets the best weather from a list of given cities.
+   *
+   * @param string  $citiesIds
+   * @return \Illuminate\Http\Response
+   */
+  public function getBestWeatherCity($citiesIds)
+  {
+    $bestWeatherCity = [];
+    $jsonCities = self::getCitiesListWeather($citiesIds);
+    $cities = json_decode($jsonCities, true);
+    foreach ($cities['list'] as $city){
+      if (empty($bestWeatherCity))
+        $bestWeatherCity = $city;
+      else {
+        if ($city['main']['temp'] > $bestWeatherCity['main']['temp']){
+          $bestWeatherCity = $city;
+        }
+      }
+    }
+    return $bestWeatherCity;
   }
 
 }
