@@ -10,8 +10,8 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/awa.css" rel="stylesheet" type="text/css"/>
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/awa.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -30,9 +30,13 @@
                 </div>
 
                 <div class="best-weather m-t-md">
-                   <a href="getbestweathercity/3128760,2911298,2960316,2735943,2509954" class="btn btn-default btn-lg" role="button" aria-pressed="true">
-                     Get the city with best weather
-                   </a>
+                    The city with the best weather is {{$bestWeatherCity['name']}} ({{$bestWeatherCity['main']['temp']}}º)
+                </div>
+
+                <div class="best-weather m-t-md">
+                  <a href="../getbestweathercity/3128760,2911298,2960316,2735943,2509954" class="btn btn-default btn-lg" role="button" aria-pressed="true">
+                    Try Again
+                  </a>
                 </div>
 
             </div>

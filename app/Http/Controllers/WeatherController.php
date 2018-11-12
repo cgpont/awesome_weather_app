@@ -94,7 +94,8 @@ class WeatherController extends Controller
         }
       }
     }
-    return $bestWeatherCity;
+    // return $bestWeatherCity;
+    return view('response')->with('bestWeatherCity', $bestWeatherCity);
   }
 
 }
