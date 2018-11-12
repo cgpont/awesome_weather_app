@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('getcityweather/{cityId}', 'WeatherController@getCityWeather')->name('weather.getCityWeather');
+
+Route::get('getcitieslistweather/{citiesIds}', 'WeatherController@getCitiesListWeather')->name('weather.getCitiesListWeather');
