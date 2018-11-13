@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client; //http://docs.guzzlephp.org
 
+use App\City;
+
 class Weather extends Model
 {
 
@@ -93,7 +95,8 @@ class Weather extends Model
         }
       }
     }
-    return $bestWeatherCity;
+    $selectedCity = new City(array('name' => $bestWeatherCity['name'], 'temperature' => $bestWeatherCity['main']['temp']));    
+    return $selectedCity;
   }
 
 }

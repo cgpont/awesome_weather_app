@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
       <div class="best-weather m-t-md">
-          The city with the best weather is {{$bestWeatherCity['name']}} ({{$bestWeatherCity['main']['temp']}}º)
+          The city with the best weather is {{$bestWeatherCity['name']}} ({{$bestWeatherCity['temperature']}}º)
       </div>
 
       <div class="best-weather m-t-md">
