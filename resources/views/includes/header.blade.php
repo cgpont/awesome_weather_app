@@ -1,5 +1,5 @@
 <div class="title m-b-md">
-    Awesome Weather App
+    <a href="/">Awesome Weather App</a>
 </div>
 
 <div class="links">
