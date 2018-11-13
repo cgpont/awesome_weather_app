@@ -63,7 +63,7 @@ class Weather extends Model
                                                 'appid' => env('OPEN_MAPS_API_ID')]
                                    ]);
       $citiesListWeatherInfo = json_decode($response->getBody()->getContents(), true);
-      return $citiesListWeatherInfo;
+      return $citiesListWeatherInfo['list'];
     } catch(\Exception $e) {
         $errorResponse = array(
             "apiError" => "There was an error when trying to get the cities weather from the API",
@@ -83,8 +83,8 @@ class Weather extends Model
   public static function getBestWeatherCity($citiesIds)
   {
     $bestWeatherCity = [];
-    $cities = self::getCitiesListWeather($citiesIds);    
-    foreach ($cities['list'] as $city){
+    $cities = self::getCitiesListWeather($citiesIds);
+    foreach ($cities as $city){
       if (empty($bestWeatherCity))
         $bestWeatherCity = $city;
       else {
