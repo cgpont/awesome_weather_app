@@ -18,7 +18,7 @@ class WeatherController extends Controller
   public function getCityWeather($cityId)
   {
     $cityWeather = Weather::getCityWeather($cityId);
-    return view('response')->with('$cityWeather', $cityWeather);
+    return view('bestcity')->with('$cityWeather', $cityWeather);
   }
 
   /**
@@ -30,7 +30,7 @@ class WeatherController extends Controller
   public function getCitiesListWeather($citiesIds)
   {
     $citiesListWeather = Weather::getCitiesListWeather($citiesIds);
-    return view('response')->with('$citiesListWeather', $citiesListWeather);
+    return view('bestcity')->with('$citiesListWeather', $citiesListWeather);
   }
 
   /**
@@ -42,7 +42,7 @@ class WeatherController extends Controller
   public function getBestWeatherCity($citiesIds)
   {
     $bestWeatherCity = Weather::getBestWeatherCity($citiesIds);
-    return view('response')->with('bestWeatherCity', $bestWeatherCity);
+    return view('bestcity')->with('bestWeatherCity', $bestWeatherCity);
   }
 
 }
