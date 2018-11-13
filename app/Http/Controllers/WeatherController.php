@@ -3,75 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GuzzleHttp\Client; //http://docs.guzzlephp.org
+
+use App\Weather;
 
 class WeatherController extends Controller
 {
 
-  private $apiUnits = 'metric';
-
   /**
    * Gets the weather for a given city id.
-   * Uses library http://docs.guzzlephp.org
    *
    * @param string  $cityId
    * @return \Illuminate\Http\Response
    */
   public function getCityWeather($cityId)
   {
-    try {
-        $client = new Client([
-            'base_uri' => env('OPEN_MAPS_API_BASE_URL'),
-            'timeout'  => 1.0,
-        ]);
-        $response = $client->request('GET',
-                                     'weather',
-                                     ['query' => ['id' => $cityId,
-                                                  'units' => $this->apiUnits,
-                                                  'appid' => env('OPEN_MAPS_API_ID')]
-                                     ]);
-        $response = $response->getBody()->getContents();
-        return $response;
-    } catch(\Exception $e) {
-        $errorResponse = array(
-            "apiError" => "There was an error when trying to get the city weather from the API",
-            "systemErrorMessage" => $e->getMessage(),
-            "systemErrorFull" => $e,
-        );
-        return $errorResponse;
-    }
+    $cityWeather = Weather::getCityWeather($cityId);
+    return view('response')->with('$cityWeather', $cityWeather);
   }
 
   /**
    * Gets the weather for all given cities ids.
-   * Uses library http://docs.guzzlephp.org
    *
    * @param string  $citiesIds
    * @return \Illuminate\Http\Response
    */
   public function getCitiesListWeather($citiesIds)
   {
-    try {
-      $client = new Client([
-          'base_uri' => env('OPEN_MAPS_API_BASE_URL'),
-          'timeout'  => 2.0,
-      ]);
-      $response = $client->request('GET',
-                                   'group',
-                                   ['query' => ['id' => $citiesIds,
-                                                'units' => $this->apiUnits,
-                                                'appid' => env('OPEN_MAPS_API_ID')]
-                                   ]);
-      $response = $response->getBody()->getContents();
-      return $response;
-    } catch(\Exception $e) {
-        $errorResponse = array(
-            "apiError" => "There was an error when trying to get the cities weather from the API",
-            "systemErrorMessage" => $e->getMessage(),
-            "systemErrorFull" => $e,
-        );
-        return $errorResponse;
-    }
+    $citiesListWeather = Weather::getCitiesListWeather($citiesIds);
+    return view('response')->with('$citiesListWeather', $citiesListWeather);
   }
 
   /**
@@ -82,19 +41,7 @@ class WeatherController extends Controller
    */
   public function getBestWeatherCity($citiesIds)
   {
-    $bestWeatherCity = [];
-    $jsonCities = self::getCitiesListWeather($citiesIds);
-    $cities = json_decode($jsonCities, true);
-    foreach ($cities['list'] as $city){
-      if (empty($bestWeatherCity))
-        $bestWeatherCity = $city;
-      else {
-        if ($city['main']['temp'] > $bestWeatherCity['main']['temp']){
-          $bestWeatherCity = $city;
-        }
-      }
-    }
-    // return $bestWeatherCity;
+    $bestWeatherCity = Weather::getBestWeatherCity($citiesIds);
     return view('response')->with('bestWeatherCity', $bestWeatherCity);
   }
 
